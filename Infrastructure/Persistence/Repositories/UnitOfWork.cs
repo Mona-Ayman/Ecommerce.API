@@ -2,7 +2,7 @@
 
 namespace Persistence.Repositories
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
 
     {
         public readonly StoreContext _context;
@@ -17,7 +17,7 @@ namespace Persistence.Repositories
         }
 
         public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : BaseEntity<TKey>   //  دي قانكشن هتكريت اوبجكت من الريبو اللي عاوزاها لو مش موجود لكن لو موجود هترجعه 
-          => (IGenericRepository<TEntity, TKey>)_repos.GetOrAdd(typeof(TEntity).Name, _ => new GenericRepository<TEntity, TKey>(_context));
+          => (IGenericRepository<TEntity, TKey>) _repos.GetOrAdd(typeof(TEntity).Name, _ => new GenericRepository<TEntity, TKey>(_context));
         //{   دي طريقة لو هستخدم الديكشناري لكن انا هستخدم كونكرنت ديكشناري فعمل الطريقة اللي فوق دي
         //    var typeName = typeof(TEntity).Name;
         //    if (_repos.ContainsKey(typeName)) return (IGenericRepository<TEntity, TKey>)_repos[typeName];
