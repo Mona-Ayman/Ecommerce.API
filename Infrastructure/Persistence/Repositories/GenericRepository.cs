@@ -1,4 +1,5 @@
-﻿using Persistence.Data;
+﻿using Domain.Contracts;
+using Persistence.Data;
 namespace Persistence.Repositories
 {
     internal class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>
@@ -20,5 +21,13 @@ namespace Persistence.Repositories
 
         public async Task<TEntity?> GetAsync(TKey id) => await _storeContext.Set<TEntity>().FindAsync(id);
 
+        public async Task<TEntity?> GetAsync(Specifications<TEntity> specifications)
+        => await ApplySpecifications(specifications).FirstOrDefaultAsync();
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Specifications<TEntity> specifications)
+           => await ApplySpecifications(specifications).ToListAsync();
+
+        private IQueryable<TEntity> ApplySpecifications(Specifications<TEntity> specifications)
+            => SpecificationEvaluator.GetQuery<TEntity>(_storeContext.Set<TEntity>(), specifications);
     }
 }
