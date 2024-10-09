@@ -2,17 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
 using Shared;
+using System;
 
 namespace Presentation
 {
     [ApiController]
-    [Route("[controller]/api")]
+    [Route("api/[controller]")]
     public class ProductsController(IServiceManager serviceManager) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductResultDTO>>> GetProducts()
+        public async Task<ActionResult<PaginatedResult<ProductResultDTO>>> GetProducts([FromQuery] ProductSpecificationParameters parameters)
         {
-            var products = await serviceManager.ProductService.GetAllProductsAsync();
+            var products = await serviceManager.ProductService.GetAllProductsAsync(parameters);
             return Ok(products);
         }
 
