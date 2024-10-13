@@ -9,6 +9,7 @@ using Services;
 using Ecommerce.Middlewares;
 using Ecommerce.Facctories;
 using Microsoft.AspNetCore.Mvc;
+using Ecommerce.Extensions;
 
 namespace Ecommerce
 {
@@ -17,29 +18,18 @@ namespace Ecommerce
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            #region Services
             // Add services to the container.
+            builder.Services.AddCoreServices();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddPresentationServices();
 
-            builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
-            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IServiceManager, ServiceManager>();
-            builder.Services.AddAutoMapper(typeof(Services.AssemblyReference).Assembly);
-            builder.Services.AddDbContext<StoreContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
-            });
-            builder.Services.Configure<ApiBehaviorOptions>(options =>                                                 // i changed the default behavior of error response and make it return the custom error response i made
-            {
-                options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidationErrorResponse;
-            });
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            #endregion
 
+            #region Pipelines
             var app = builder.Build();
-            app.UseMiddleware<GloballErrorHandlingMiddleware>();
-            await initializeDbAsync(app);
+            app.UseCustomExceptionMiddleware();
+            await app.SeedDbAsync();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -55,14 +45,10 @@ namespace Ecommerce
             app.MapControllers();
 
             app.Run();
+            #endregion
 
-            //Create object from type that implement IDbInitializer
-            async Task initializeDbAsync(WebApplication app)
-            {
-                using var scope = app.Services.CreateScope();
-                var dbinitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>(); //IDbInitializer => the interface that has the method of seeding
-                await dbinitializer.InitializeAsync();                                 //InitializeAsync => the method inside the interface
-            }
+
+
         }
     }
 }
