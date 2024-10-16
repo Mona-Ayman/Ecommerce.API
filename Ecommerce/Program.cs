@@ -20,7 +20,7 @@ namespace Ecommerce
             var builder = WebApplication.CreateBuilder(args);
             #region Services
             // Add services to the container.
-            builder.Services.AddCoreServices();
+            builder.Services.AddCoreServices(builder.Configuration);
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddPresentationServices();
 
@@ -38,7 +38,7 @@ namespace Ecommerce
             }
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

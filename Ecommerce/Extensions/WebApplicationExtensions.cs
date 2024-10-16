@@ -11,7 +11,8 @@ namespace Ecommerce.Extensions
             using var scope = app.Services.CreateScope();
             var dbinitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>(); //IDbInitializer => the interface that has the method of seeding
             await dbinitializer.InitializeAsync();                                 //InitializeAsync => the method inside the interface
-        
+            await dbinitializer.InitializeIdentityAsync();                                 //InitializeIdentityAsync => the method inside the interface
+
             return app;
         }
 
