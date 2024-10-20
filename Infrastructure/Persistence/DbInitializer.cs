@@ -1,4 +1,5 @@
 ﻿
+using Domain.Entities.OrderEntities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
@@ -63,7 +64,19 @@ namespace Persistence
                         await _context.SaveChangesAsync();
                     }
                 }
-            }catch(Exception ex)
+
+                if (!_context.DeliveryMethods.Any())
+                {
+                    var data = await File.ReadAllTextAsync(@"..\Infrastructure\Persistence\Data\Seeding\delivery.json");
+                    var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(data);
+                    if (methods != null && methods.Any())
+                    {
+                        await _context.AddRangeAsync(methods);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 throw;
             }
@@ -72,14 +85,14 @@ namespace Persistence
         public async Task InitializeIdentityAsync()
         {
             //seed default roles
-            if(!_roleManager.Roles.Any())
+            if (!_roleManager.Roles.Any())
             {
                 await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
             }
 
             //seed default users
-            if(!_userManager.Users.Any())
+            if (!_userManager.Users.Any())
             {
                 var superAdmin = new User
                 {
