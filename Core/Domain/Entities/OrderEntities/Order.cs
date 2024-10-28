@@ -11,7 +11,8 @@ namespace Domain.Entities.OrderEntities
             ShippingAddress shippingAddress,
             ICollection<OrderItem> orderItems,
             DeliveryMethod deliveryMethods,
-            decimal subtotal)
+            decimal subtotal,
+            string paymentIntentId)
         {
             Id = Guid.NewGuid();
             UserEmail = userEmail;
@@ -19,6 +20,7 @@ namespace Domain.Entities.OrderEntities
             OrderItems = orderItems;
             DeliveryMethods = deliveryMethods;
             Subtotal = subtotal;
+            PaymentIntentId = paymentIntentId;
         }
 
         public string UserEmail { get; set; }
@@ -28,7 +30,7 @@ namespace Domain.Entities.OrderEntities
         public DeliveryMethod DeliveryMethods { get; set; }               //ref navigational prop
         public int? DeliveryMethodId { get; set; }
         public decimal Subtotal { get; set; }           //subtotal = items.quantity * price
-        public string PaymentIntentId { get; set; } = string.Empty;
+        public string PaymentIntentId { get; set; }
         public DateTimeOffset OrderDate { get; set; }
     }
 }

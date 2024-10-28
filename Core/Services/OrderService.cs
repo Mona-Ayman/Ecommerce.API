@@ -15,7 +15,7 @@ namespace Services
         public async Task<OrderResultDTO> CreateOrderAsync(OrderRequestDTO request, string UserEmail)
         {
             // address
-            var address = mapper.Map<ShippingAddress>(request.shippingAddress);
+            var address = mapper.Map<ShippingAddress>(request.shipToAddress);
 
             // orderItms
             var basket = await basketRepository.GetBasketAsync(request.BasketId) ?? throw new BasketNotFoundException(request.BasketId);
@@ -34,8 +34,14 @@ namespace Services
             var subTotal = orderItems.Sum(item => item.Quantity * item.Price);
 
             // save to db
-            var order = new Order(UserEmail, address, orderItems, deliveryMethod, subTotal);
-            await unitOfWork.GetRepository<Order, Guid>().CreateAsync(order);
+            var orderRepo = unitOfWork.GetRepository<Order, Guid>();
+            var existingOrder = await orderRepo.GetAsync(new OrderWithPaymentIntentSpecifications(basket.PaymentIntentId!));
+            if (existingOrder != null)
+            {
+                orderRepo.Delete(existingOrder);
+            }
+            var order = new Order(UserEmail, address, orderItems, deliveryMethod, subTotal, basket.PaymentIntentId);
+            await orderRepo.CreateAsync(order);
             await unitOfWork.SaveChangesAsync();
 
             // mapping & return

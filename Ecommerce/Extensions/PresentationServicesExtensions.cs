@@ -14,6 +14,15 @@ namespace Ecommerce.Extensions
             });
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORSPolicy", builder =>
+                {
+                    builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins("http://localhost:4200");
+                });
+            });
             return services;
         }
     }

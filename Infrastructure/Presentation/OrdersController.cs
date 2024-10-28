@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace Presentation
 {
     [Authorize]
-    public class OrderController(IServiceManager serviceManager) : ApiController
+    public class OrdersController(IServiceManager serviceManager) : ApiController
     {
         [HttpPost]
         public async Task<ActionResult<OrderResultDTO>> CreateOrder(OrderRequestDTO request)

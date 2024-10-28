@@ -37,10 +37,10 @@ namespace Ecommerce
                 app.UseSwaggerUI();
             }
             app.UseStaticFiles();
+            app.UseCors("CORSPolicy");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
