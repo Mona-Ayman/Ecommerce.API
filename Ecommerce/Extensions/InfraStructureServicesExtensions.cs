@@ -23,6 +23,7 @@ namespace Ecommerce.Extensions
         {
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICacheRepository, CacheRepository>();
 
             services.AddDbContext<StoreContext>(options =>
             {

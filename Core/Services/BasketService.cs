@@ -22,7 +22,7 @@ namespace Services
         {
             var value = mapper.Map<CustomerBasket>(basket);
             var result = await basketRepository.UpdateBasketAsync(value);
-            return result is null ? throw new Exception("Can't update basket nowk") : mapper.Map<BasketDTO>(result);
+            return result is null ? throw new Exception("Can't update basket now") : mapper.Map<BasketDTO>(result);
         }
     }
 }

@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce", "Ecommerce\Ecommerce.csproj", "{FC0D76DA-DF4B-45EF-8F01-63B3007AAE69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce", "Ecommerce\Ecommerce.csproj", "{FC0D76DA-DF4B-45EF-8F01-63B3007AAE69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Core\Domain\Domain.csproj", "{A20FA586-EFBA-44D6-A0AF-F9F90096FC18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Core\Domain\Domain.csproj", "{A20FA586-EFBA-44D6-A0AF-F9F90096FC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Core\Services\Services.csproj", "{2F5EB9D2-87D5-4571-B619-F80737711BEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Core\Services\Services.csproj", "{2F5EB9D2-87D5-4571-B619-F80737711BEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Abstractions", "Core\Services.Abstractions\Services.Abstractions.csproj", "{BFD79EA5-75D2-4119-B419-FA513295AD1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Abstractions", "Core\Services.Abstractions\Services.Abstractions.csproj", "{BFD79EA5-75D2-4119-B419-FA513295AD1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2A2E04B2-81D6-4FD3-87B9-34041710036E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5F4D20FB-89B1-4225-9516-0F59B6E36923}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Infrastructure\Persistence\Persistence.csproj", "{A9DFE9DC-DBB2-42B6-9C4A-99D3CF247778}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Infrastructure\Persistence\Persistence.csproj", "{A9DFE9DC-DBB2-42B6-9C4A-99D3CF247778}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Infrastructure\Presentation\Presentation.csproj", "{AE85429A-44EB-4619-830C-08689BDB1E92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Infrastructure\Presentation\Presentation.csproj", "{AE85429A-44EB-4619-830C-08689BDB1E92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{D93EB9AF-A081-4D09-ABF8-DECAC2CB1F50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{D93EB9AF-A081-4D09-ABF8-DECAC2CB1F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{583784EE-9E26-4FC5-9D74-B54BF588335B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{D93EB9AF-A081-4D09-ABF8-DECAC2CB1F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D93EB9AF-A081-4D09-ABF8-DECAC2CB1F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D93EB9AF-A081-4D09-ABF8-DECAC2CB1F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{583784EE-9E26-4FC5-9D74-B54BF588335B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583784EE-9E26-4FC5-9D74-B54BF588335B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583784EE-9E26-4FC5-9D74-B54BF588335B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583784EE-9E26-4FC5-9D74-B54BF588335B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
